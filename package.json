@@ -6,7 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+      
+    "db:install": "docker pull cassandra:latest",
+    "db:up": "npm run db:start && npm run db:copy && echo Waiting... && sleep 60 && npm run db:create",
+    "db:down": "docker kill RRdb ; docker network rm RRdb-Network",
+    "db:update": "npm run db:copy && npm run db:create",
+
+    "db:start": "docker network create RRdb-Network && docker run --rm -d --name RRdb --hostname cassandra --network RRdb-Network cassandra",
+    "db:copy": "docker cp src/db RRdb:/",
+    "db:create": "docker exec -it RRdb cqlsh -f ./db/create.cql",
+    
+
+    "db:bash": "docker exec -it RRdb /bin/bash",
+    "db:cqlsh": "docker exec -it RRdb cqlsh"
   },
   "dependencies": {
     "next": "14.1.0",
