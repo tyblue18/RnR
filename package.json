@@ -7,25 +7,27 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-      
     "db:install": "docker pull cassandra:latest",
     "db:up": "npm run db:start && npm run db:copy && echo Waiting... && sleep 60 && npm run db:create",
     "db:down": "docker kill RRdb ; docker network rm RRdb-Network",
     "db:update": "npm run db:copy && npm run db:create",
-
     "db:start": "docker network create RRdb-Network && docker run --rm -d --name RRdb --hostname cassandra --network RRdb-Network cassandra",
     "db:copy": "docker cp src/db RRdb:/",
     "db:create": "docker exec -it RRdb cqlsh -f ./db/create.cql",
-    
-
     "db:bash": "docker exec -it RRdb /bin/bash",
     "db:cqlsh": "docker exec -it RRdb cqlsh"
   },
   "dependencies": {
+    "@chakra-ui/next-js": "^2.2.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "framer-motion": "^11.0.3",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
     "eslint": "^8",

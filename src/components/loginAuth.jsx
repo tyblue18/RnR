@@ -1,27 +1,24 @@
+"use client"
 import Image from "next/image";
+import { Button } from '@chakra-ui/react'
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
-export default function LoginAuth({ provider, onClick, imgSrc, altText }) {
+const iconMap = {
+  "GitHub": <FaGithub />,
+  "Google": <FaGoogle />,
+}
+
+export default function LoginAuth({ provider, onClick, color, altText }) {
     return(
       <div>
-        <button className="login-button" onClick={onClick}>
-          <Image src={imgSrc} alt={altText} width={20} height={20} />
-          Log in with {provider}
-          </button>
-
-          <style jsx>{`
-          div {
-            margin-bottom: 10px;
-          }
-
-          button {
-            color: white;
-            padding: 15px;
-            margin-top: 20px;
-            cursor: pointer;
-          }
-        `}</style>
+        <Button 
+          colorScheme={color}
+          leftIcon={iconMap[provider]} 
+          onClick={onClick} 
+          altText={altText}> 
+            Login with {provider} 
+        </Button>
       </div>
-      
     );
   }
 

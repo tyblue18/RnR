@@ -18,17 +18,17 @@ export default function Home() {
         onClick={() => {
           signIn("github");
         }}
-        imgSrc="/github_logo.png"
-        altText="Github Logo"
+        color="whiteAlpha"
+        altText="Github Icon"
       />
 
       <LoginAuth
-        provider="Gmail"
+        provider="Google"
         onClick={() => {
           signIn("gmail");
         }}
-        imgSrc="/gmail_logo.jpeg"
-        altText="Gmail Logo"
+        color="gray"
+        altText="Google Icon"
       />
       <style jsx>{`
         main {
