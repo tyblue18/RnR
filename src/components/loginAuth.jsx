@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 export default function LoginAuth({ provider, onClick, imgSrc, altText }) {
     return(
       <div>
         <button className="login-button" onClick={onClick}>
-          <img src={imgSrc} alt={altText} />
+          <Image src={imgSrc} alt={altText} width={20} height={20} />
           Log in with {provider}
           </button>
 

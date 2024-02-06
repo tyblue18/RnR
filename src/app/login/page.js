@@ -1,8 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
 import LoginAuth from "@/components/loginAuth";
-console.log(process.env.GITHUB_ID);
-
 
 export default function Home() {
   return (
@@ -15,21 +13,28 @@ export default function Home() {
       >
         Sign in
       </button> */}
-      <LoginAuth provider="GitHub" onClick={() => {signIn("github")}} 
-      imgSrc="/app/images/github logo.png"
-      altText="Github Logo"
+      <LoginAuth
+        provider="GitHub"
+        onClick={() => {
+          signIn("github");
+        }}
+        imgSrc="/github_logo.png"
+        altText="Github Logo"
       />
-  
-      <LoginAuth provider="Gmail" onClick={() => {signIn("gmail")}}
-      imgSrc="/app/images/gmail logo.jpeg"
-      altText="Gmail Logo"
+
+      <LoginAuth
+        provider="Gmail"
+        onClick={() => {
+          signIn("gmail");
+        }}
+        imgSrc="/gmail_logo.jpeg"
+        altText="Gmail Logo"
       />
       <style jsx>{`
         main {
           text-align: center;
           padding: 20px;
         }
-    
       `}</style>
     </main>
   );
