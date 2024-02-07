@@ -15,7 +15,7 @@ export default function LoginAuth({ provider, onClick, color, altText }) {
           colorScheme={color}
           leftIcon={iconMap[provider]} 
           onClick={onClick} 
-          altText={altText}> 
+          > 
             Login with {provider} 
         </Button>
       </div>
