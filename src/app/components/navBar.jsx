@@ -4,7 +4,7 @@ import { Text, Button } from "@chakra-ui/react";
 
 export default function NavBar() {
   return (
-    <div>
+    <>
       <nav>
         <Text ml={10}>Flavy</Text>
         <Button
@@ -30,6 +30,6 @@ export default function NavBar() {
           }
         `}
       </style>
-    </div>
+    </>
   );
 }

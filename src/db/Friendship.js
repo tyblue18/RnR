@@ -1,4 +1,4 @@
-db.createCollection("friendship");
+db.createCollection("Friendship");
 
 db.friendship.insertOne({
   user1: "",
