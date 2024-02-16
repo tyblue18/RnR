@@ -7,15 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:install": "docker pull cassandra:latest",
+
+    "db:install": "docker pull mongodb/mongodb-community-server",
+
     "db:up": "npm run db:start && npm run db:copy && echo Waiting... && sleep 60 && npm run db:create",
-    "db:down": "docker kill RRdb ; docker network rm RRdb-Network",
-    "db:update": "npm run db:copy && npm run db:create",
-    "db:start": "docker network create RRdb-Network && docker run --rm -d --name RRdb --hostname cassandra --network RRdb-Network cassandra",
+    "db:down": "docker kill RRdb",
+    
+    "db:start": "docker run --name RRdb -d mongodb/mongodb-community-server:latest",
     "db:copy": "docker cp src/db RRdb:/",
-    "db:create": "docker exec -it RRdb cqlsh -f ./db/create.cql",
-    "db:bash": "docker exec -it RRdb /bin/bash",
-    "db:cqlsh": "docker exec -it RRdb cqlsh"
+    "db:sh": "docker exec -it RRdb mongosh",
+    "db:bash": "docker exec -it RRdb bash",
+
+    "db:update": "npm run db:copy && npm run db:create",
+    "db:create": "docker exec -it RRdb mongosh -f ./db/createDB.js.js -f ./db/loadUsers.js"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.2.0",

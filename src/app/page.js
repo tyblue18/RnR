@@ -1,25 +1,13 @@
-"use client";
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Link } from "@chakra-ui/next-js";
-import { signIn } from "next-auth/react";
-import { Button } from "@chakra-ui/react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Page() {
+  const session = await getServerSession();
+  if (session) redirect("/home");
   return (
     <main>
-      Restaurant Rater
-      <br />
-      {/* <Link href="/login" color="blue.400" _hover={{ color: "blue.500" }}>
-        Login
-      </Link> */}
-      <Button
-        onClick={() => {
-          signIn();
-        }}
-      >
-        Sign In
-      </Button>
+      <h1>Restaurant Rater</h1>
+      <p>{session?.user?.name || "name"}</p>
     </main>
   );
 }
