@@ -1,8 +1,18 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Text, Button } from "@chakra-ui/react";
 
+
+
 export default function NavBar() {
+  const {data: session, status } =  useSession();
+
+  let statusText = "Sign Out";
+  let statusFunc = signOut;
+  if (status === "unauthenticated") {
+    statusText = "Sign In";
+    statusFunc = signIn;
+  }
   return (
     <>
       <nav>
@@ -12,10 +22,10 @@ export default function NavBar() {
           colorScheme="purple"
           variant="link"
           onClick={() => {
-            signIn();
+            statusFunc();
           }}
         >
-          Sign In
+          {statusText}
         </Button>
       </nav>
       <style jsx>

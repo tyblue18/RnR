@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const session = await getServerSession();
+  console.log("---", session);
   if (session) redirect("/home");
   return (
     <main>
