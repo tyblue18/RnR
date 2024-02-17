@@ -1,6 +1,8 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Text, Button } from "@chakra-ui/react";
+import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
+
 
 
 
@@ -16,6 +18,7 @@ export default function NavBar() {
   return (
     <>
       <nav>
+        <Avatar></Avatar>
         <Text ml={10}>Flavy</Text>
         <Button
           mr={10}
@@ -23,6 +26,7 @@ export default function NavBar() {
           variant="link"
           onClick={() => {
             statusFunc();
+            
           }}
         >
           {statusText}
