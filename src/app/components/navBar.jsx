@@ -1,6 +1,6 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Text, Button } from "@chakra-ui/react";
+import { Text, Button, background } from "@chakra-ui/react";
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
 import { userAgent } from "next/server";
 
@@ -46,6 +46,11 @@ export default function NavBar() {
             background-color: #1b1c23;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+          }
+          div {
+            display: flex;
+            justify-content: space-around;
             align-items: center;
           }
         `}
