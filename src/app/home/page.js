@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <>
       <h1> Welcome {session?.user?.name || "User"}! </h1>
-      <button onClick={() => signOut()}>Sign out</button>
     </>
   );
 }
