@@ -3,8 +3,16 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Text, Button, background } from "@chakra-ui/react";
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
 import { userAgent } from "next/server";
+import {
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function NavBar() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { data: session, status } = useSession();
 
   let statusText = "Sign Out";
@@ -20,12 +28,37 @@ export default function NavBar() {
         <Text ml={10}>Flavy</Text>
         <div>
           {status === "authenticated" ? (
-            <Avatar
-              name={session?.user?.name}
-              src={session?.user?.image}
-              size="sm"
-            />
+            <>
+              <Avatar
+                name={session?.user?.name}
+                src={session?.user?.image}
+                size="sm"
+                onClick={() => setIsDrawerOpen(true)}
+              />
+              <Drawer
+                isOpen={isDrawerOpen}
+                onClose={() => setIsDrawerOpen(false)}
+                placement="right"
+              >
+                <DrawerOverlay />
+                <DrawerContent>
+                  <DrawerCloseButton />
+                  {
+                    <>
+                      <Avatar
+                        name={session?.user?.name}
+                        src={session?.user?.image}
+                        size="sm"
+                      ></Avatar>
+                      <h1> Happy eating {session?.user?.name || "User"}! </h1>
+                    </>
+                  }
+                  <div></div>
+                </DrawerContent>
+              </Drawer>
+            </>
           ) : null}
+
           <Button
             mr={10}
             colorScheme="purple"
@@ -52,6 +85,9 @@ export default function NavBar() {
             display: flex;
             justify-content: space-around;
             align-items: center;
+          }
+          h1 {
+            background-color: black;
           }
         `}
       </style>
