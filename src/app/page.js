@@ -1,9 +1,11 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
+// import { connectToMongo } from "@/libs/mongo.lib.mjs";
+
 export default async function Page() {
   const session = await getServerSession();
-  console.log("---", session);
+
   if (session) redirect("/home");
   return (
     <main>

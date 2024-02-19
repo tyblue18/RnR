@@ -30,15 +30,4 @@ npm run dev
 
 ### Check the database
 
-First access the cqlsh (CQL shell) in docker
-
-```bash
-# Runs the cqlsh on the database
-npm run db:cqlsh
-```
-
-Then run commands to check the data
-
-```cqlsh
-SELECT * FROM Users.user;
-```
+Spin up the server and then navigate to /api/user

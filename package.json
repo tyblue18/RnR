@@ -7,19 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-
     "db:install": "docker pull mongodb/mongodb-community-server",
-
-    "db:up": "npm run db:start && npm run db:copy && echo Waiting... && sleep 60 && npm run db:create",
-    "db:down": "docker kill RRdb",
-    
-    "db:start": "docker run --name RRdb -d mongodb/mongodb-community-server:latest",
-    "db:copy": "docker cp src/db RRdb:/",
+    "db:up": "npm run db:start && npm run db:create",
+    "db:down": "docker kill RRdb ; docker rm /RRdb",
+    "db:start": "docker run --name RRdb -d -p 27017:27017 mongodb/mongodb-community-server:latest",
+    "db:create": "node --experimental-specifier-resolution=node --experimental-modules --env-file=.env.local ./src/db/createSeed.mjs",
     "db:sh": "docker exec -it RRdb mongosh",
-    "db:bash": "docker exec -it RRdb bash",
-
-    "db:update": "npm run db:copy && npm run db:create",
-    "db:create": "docker exec -it RRdb mongosh -f ./db/createDB.js.js -f ./db/loadUsers.js"
+    "db:bash": "docker exec -it RRdb bash"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.2.0",
@@ -27,6 +21,7 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "framer-motion": "^11.0.3",
+    "mongoose": "^8.1.3",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "react": "^18",
