@@ -1,0 +1,17 @@
+.nav {
+    height: 40px;
+    width: 100dvw;
+    background-color: #1b1c23;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.rightSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+    
+  .headerText {
+    color: black;
+  }

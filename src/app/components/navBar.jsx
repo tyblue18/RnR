@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { capitalizeFirstLetter } from "@/libs/util";
+import style from "@/app/styles/navBar.module.css";
 
 export default function NavBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -24,9 +25,9 @@ export default function NavBar() {
 
   return (
     <>
-      <nav>
+      <nav className={style.nav}>
         <Text ml={10}>Flavy</Text>
-        <div>
+        <div className={style.rightSection}>
           {status === "authenticated" ? (
             <>
               <Avatar
@@ -54,7 +55,7 @@ export default function NavBar() {
                           size="lg"
                           mr={3}
                         ></Avatar>
-                        <h1>
+                        <h1 className={style.headerText}>
                           {" "}
                           Happy eating{" "}
                           {capitalizeFirstLetter(session?.user?.name) || "User"}
@@ -91,26 +92,6 @@ export default function NavBar() {
           </Button>
         </div>
       </nav>
-      <style jsx>
-        {`
-          nav {
-            height: 40px;
-            width: 100dvw;
-            background-color: #1b1c23;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          }
-          div {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-          }
-          h1 {
-            background-color: black;
-          }
-        `}
-      </style>
     </>
   );
 }
