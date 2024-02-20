@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 import { connectToMongo } from "@/libs/mongo.lib.mjs";
-import UserModel from "@/db/models/User.model.mjs";
+import { UserModel } from "@/db/models/User.model.mjs";
 
 export async function GET(request) {
   const name = request.nextUrl.searchParams.get("name");
@@ -13,11 +13,24 @@ export async function GET(request) {
 
     const regex = new RegExp(name, "i");
     if (!name) {
-      users = await UserModel.find({});
+      users = await UserModel.find({}, { _id: 0 })
+        .populate({
+          path: "friends",
+          populate: { path: "friend", select: "name -_id" },
+        })
+        .exec();
     } else {
-      users = await UserModel.find({
-        $or: [{ email: regex }, { name: regex }],
-      });
+      users = await UserModel.find(
+        {
+          $or: [{ email: regex }, { name: regex }],
+        },
+        { _id: 0 }
+      )
+        .populate({
+          path: "friends",
+          populate: { path: "friend", select: "name -_id" },
+        })
+        .exec();
     }
 
     await mongoose.connection.close();
