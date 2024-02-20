@@ -16,6 +16,7 @@
     "db:bash": "docker exec -it RRdb bash"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
@@ -25,8 +26,7 @@
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "react": "^18",
-    "react-dom": "^18",
-    "react-icons": "^5.0.1"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "eslint": "^8",
