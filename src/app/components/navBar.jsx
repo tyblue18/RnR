@@ -11,6 +11,12 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
+export function capitalizeFirstLetter(string) {
+  return string
+    ? string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+    : "";
+}
+
 export default function NavBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { data: session, status } = useSession();
@@ -49,12 +55,17 @@ export default function NavBar() {
                     <>
                       <Flex align="center" justify="center">
                         <Avatar
-                          name={session?.user?.name}
+                          name={capitalizeFirstLetter(session?.user?.name)}
                           src={session?.user?.image}
                           size="lg"
                           mr={3}
                         ></Avatar>
-                        <h1> Happy eating {session?.user?.name || "User"}! </h1>
+                        <h1>
+                          {" "}
+                          Happy eating{" "}
+                          {capitalizeFirstLetter(session?.user?.name) || "User"}
+                          !{" "}
+                        </h1>
                       </Flex>
                       <Button
                         mt={4}
