@@ -1,17 +1,34 @@
 .nav {
-    height: 40px;
-    width: 100dvw;
-    background-color: #1b1c23;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  height: 40px;
+  width: 100dvw;
+  background-color: #1b1c23;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .rightSection {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-    
-  .headerText {
-    color: black;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.headerText {
+  color: black;
+}
+
+.select {
+  width: 300px;
+}
+
+.userButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: transreparent;
+  border-radius: 5px;
+}
+
+.userButton:hover {
+  background-color: #ebebeb;
+}

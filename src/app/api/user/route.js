@@ -5,6 +5,7 @@ import { connectToMongo } from "@/libs/mongo.lib.mjs";
 import { UserModel } from "@/db/models/User.model.mjs";
 
 export async function GET(request) {
+  console.log("GET /api/user");
   const name = request.nextUrl.searchParams.get("name");
 
   try {

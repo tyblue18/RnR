@@ -11,6 +11,7 @@ const userSchema = new Schema(
     name: String,
     email: String,
     phoneNumber: String,
+    image: String,
     friends: [friendSchema],
   },
   {
