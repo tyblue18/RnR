@@ -1,6 +1,6 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Text, Button, background } from "@chakra-ui/react";
+import { Text, Button, background, Flex } from "@chakra-ui/react";
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
 import { userAgent } from "next/server";
 import {
@@ -34,26 +34,41 @@ export default function NavBar() {
                 src={session?.user?.image}
                 size="sm"
                 onClick={() => setIsDrawerOpen(true)}
+                mr={3}
               />
               <Drawer
                 isOpen={isDrawerOpen}
                 onClose={() => setIsDrawerOpen(false)}
                 placement="right"
               >
-                <DrawerOverlay />
+                <DrawerOverlay background="#black" />
+
                 <DrawerContent>
                   <DrawerCloseButton />
                   {
                     <>
-                      <Avatar
-                        name={session?.user?.name}
-                        src={session?.user?.image}
-                        size="sm"
-                      ></Avatar>
-                      <h1> Happy eating {session?.user?.name || "User"}! </h1>
+                      <Flex align="center" justify="center">
+                        <Avatar
+                          name={session?.user?.name}
+                          src={session?.user?.image}
+                          size="lg"
+                          mr={3}
+                        ></Avatar>
+                        <h1> Happy eating {session?.user?.name || "User"}! </h1>
+                      </Flex>
+                      <Button
+                        mt={4}
+                        colorScheme="purple"
+                        variant="outline"
+                        onClick={() => {
+                          statusFunc();
+                          setIsDrawerOpen(false);
+                        }}
+                      >
+                        Sign Out
+                      </Button>
                     </>
                   }
-                  <div></div>
                 </DrawerContent>
               </Drawer>
             </>
