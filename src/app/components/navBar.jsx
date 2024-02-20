@@ -1,8 +1,7 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Text, Button, background, Flex } from "@chakra-ui/react";
-import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
-import { userAgent } from "next/server";
+import { Text, Button, Flex } from "@chakra-ui/react";
+import { Avatar } from "@chakra-ui/react";
 import {
   Drawer,
   DrawerOverlay,
@@ -10,12 +9,7 @@ import {
   DrawerCloseButton,
 } from "@chakra-ui/react";
 import { useState } from "react";
-
-export function capitalizeFirstLetter(string) {
-  return string
-    ? string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-    : "";
-}
+import { capitalizeFirstLetter } from "@/libs/util";
 
 export default function NavBar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

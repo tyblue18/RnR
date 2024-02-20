@@ -1,16 +1,16 @@
-"use client";
-import { useSession, signOut } from "next-auth/react";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { capitalizeFirstLetter } from "../components/navBar.jsx";
+import { capitalizeFirstLetter } from "@/libs/util";
+import Search from "@/app/components/search";
 
-export default function Home() {
-  const { data: session, status } = useSession();
+export default async function Home() {
+  const session = await getServerSession();
 
-  if (status === "unauthenticated") return redirect("/");
-
+  if (!session) return redirect("/");
   return (
     <>
       <h1> Welcome {capitalizeFirstLetter(session?.user?.name) || "User"}! </h1>
+      <Search></Search>
     </>
   );
 }
