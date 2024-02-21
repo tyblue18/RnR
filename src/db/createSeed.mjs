@@ -1,4 +1,4 @@
-import { connectToMongo } from "../libs/mongo.lib.mjs";
+import db from "../libs/mongo.lib.mjs";
 import { UserModel, FriendModel } from "./models/User.model.mjs";
 
 async function createUser(name, email, phoneNumber, image) {
@@ -32,7 +32,7 @@ async function addFriend(person1, person2) {
 }
 
 export async function createSeedData() {
-  await connectToMongo();
+  await db;
 
   const ragum = await createUser(
     "Ragum Pirani",
