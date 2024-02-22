@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 
+if (!process.env.MONGODB_URI) {
+  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
+}
+
 const MONGODB_URI = process.env.MONGODB_URI;
 
-export const connectToMongo = async () => {
-  if (MONGODB_URI) {
-    try {
-      await mongoose.connect(MONGODB_URI);
-    } catch (err) {
-      console.error("Unable to connect to the database ", err);
-    }
-  } else {
-    console.error("Mongo URL not found");
-  }
-};
+let db;
+try {
+  db = await mongoose.connect(MONGODB_URI);
+} catch (err) {
+  console.error("Unable to connect to the database ", err);
+}
+
+export default db;

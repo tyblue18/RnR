@@ -18,6 +18,7 @@ export default function Search() {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await fetch("/api/user");
+      if (!response.ok) return;
       console.log("res", response);
       const data = await response.json();
       console.log("d", data);
