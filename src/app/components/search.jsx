@@ -15,18 +15,20 @@ import Style from "@/app/styles/navBar.module.css";
 export default function Search() {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch("/api/user");
-      if (!response.ok) return;
-      console.log("res", response);
-      const data = await response.json();
-      console.log("d", data);
-      setUsers(data);
-    };
+  const fetchUsers = async (searchVal) => {
+    if (searchVal === "") {
+      setUsers([]);
+      return;
+    }
+    const params = new URLSearchParams();
+    params.append("name", searchVal);
 
-    fetchUsers();
-  }, []);
+    const response = await fetch("api/user?" + params);
+    if (!response.ok) return;
+
+    const data = await response.json();
+    setUsers(data);
+  };
 
   return (
     <Card className={Style.select}>
@@ -34,7 +36,10 @@ export default function Search() {
         <InputLeftElement pointerEvents="none">
           <SearchIcon color="gray.400" />
         </InputLeftElement>
-        <Input placeholder="search user..."></Input>
+        <Input
+          onChange={(event) => fetchUsers(event.target.value)}
+          placeholder="search user..."
+        ></Input>
       </InputGroup>
       <CardBody display="flex" flexDirection="column" pt={0}>
         {users.map((user) => {
@@ -51,7 +56,6 @@ export default function Search() {
                   </Text>
                 </section>
               </button>
-              {/* <Button mt={1}>{user.name}</Button> */}
             </div>
           );
         })}
