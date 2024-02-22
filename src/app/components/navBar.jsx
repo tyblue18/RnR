@@ -3,17 +3,21 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Text, Button, Flex } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/react";
 import {
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { capitalizeFirstLetter } from "@/libs/util";
 import style from "@/app/styles/navBar.module.css";
 
 export default function NavBar() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session, status } = useSession();
 
   let statusText = "Sign Out";
@@ -30,56 +34,42 @@ export default function NavBar() {
         <div className={style.rightSection}>
           {status === "authenticated" ? (
             <>
-              <Avatar
-                name={session?.user?.name}
-                src={session?.user?.image}
-                size="sm"
-                onClick={() => setIsDrawerOpen(true)}
-                mr={3}
-              />
-              <Drawer
-                isOpen={isDrawerOpen}
-                onClose={() => setIsDrawerOpen(false)}
-                placement="right"
-              >
-                <DrawerOverlay background="#black" />
-
-                <DrawerContent>
-                  <DrawerCloseButton />
-                  {
-                    <>
-                      <Flex align="center" justify="center">
-                        <Avatar
-                          name={capitalizeFirstLetter(session?.user?.name)}
-                          src={session?.user?.image}
-                          size="lg"
-                          mr={3}
-                        ></Avatar>
-                        <h1 className={style.headerText}>
-                          {" "}
-                          Happy eating{" "}
-                          {capitalizeFirstLetter(session?.user?.name) || "User"}
-                          !{" "}
-                        </h1>
-                      </Flex>
-                      <Button
-                        mt={4}
-                        colorScheme="purple"
-                        variant="outline"
-                        onClick={() => {
-                          statusFunc();
-                          setIsDrawerOpen(false);
-                        }}
-                      >
-                        Sign Out
-                      </Button>
-                    </>
-                  }
-                </DrawerContent>
-              </Drawer>
+              <Menu>
+                <MenuButton
+                  as={Avatar}
+                  size="sm"
+                  name={session?.user?.name}
+                  src={session?.user?.image}
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  mr={3}
+                />
+                <MenuList>
+                  <Flex align="center" justify="center">
+                    <Avatar
+                      name={capitalizeFirstLetter(session?.user?.name)}
+                      src={session?.user?.image}
+                      size="lg"
+                      mr={3}
+                    ></Avatar>
+                    <h1 className={style.headerText}>
+                      {" "}
+                      Happy eating{" "}
+                      {capitalizeFirstLetter(session?.user?.name) ||
+                        "User"}!{" "}
+                    </h1>
+                  </Flex>
+                  <MenuItem
+                    onClick={() => {
+                      statusFunc();
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Sign Out
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </>
           ) : null}
-
           <Button
             mr={10}
             colorScheme="purple"
