@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { MongoClient } from "mongodb";
-
+import { createUser } from "@/db/models/User.model.mjs";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import DiscordProvider from "next-auth/providers/discord";
@@ -16,16 +16,13 @@ export const authOptions = {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       profile(profile) {
-        console.log(profile);
-        const user = {
+        const user = createUser({
           name: profile?.name || profile.login,
           email: profile.email,
-          phoneNumber: null,
           image: profile.avatar_url,
           friends: [],
-          id: profile.id,
-        };
-
+        });
+        user.id = profile.id;
         return user;
       },
     }),
@@ -33,14 +30,14 @@ export const authOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
       profile(profile) {
-        const user = {
+        const user = createUser({
           name: profile.name,
           email: profile.email,
           phoneNumber: null,
           image: profile.picture,
           friends: [],
-          id: profile.sub,
-        };
+        });
+        user.id = profile.sub;
 
         return user;
       },
@@ -49,14 +46,14 @@ export const authOptions = {
       clientId: process.env.DISCORD_ID,
       clientSecret: process.env.DISCORD_SECRET,
       profile(profile) {
-        const user = {
+        const user = createUser({
           name: profile.username,
           email: profile.email,
           phoneNumber: null,
           image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`,
           friends: [],
-          id: profile.id,
-        };
+        });
+        user.id = profile.id;
 
         return user;
       },

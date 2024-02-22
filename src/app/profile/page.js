@@ -37,13 +37,8 @@ export default async function ProfilePage() {
               borderWidth="2px"
             />
             <Flex flexDirection="column">
-              <Text fontWeight="bold" mb={1}>
-                {" "}
-                Name: {capitalizeFirstLetter(session?.user?.name)}
-              </Text>
-              <Text fontWeight="bold" mb={1}>
-                Email: {capitalizeFirstLetter(session?.user?.email)}
-              </Text>
+              <Text> Name: {capitalizeFirstLetter(session?.user?.name)}</Text>
+              <Text>Email: {capitalizeFirstLetter(session?.user?.email)}</Text>
             </Flex>
             <div style={{ borderBottom: "1px solid black" }}></div>
           </Flex>
