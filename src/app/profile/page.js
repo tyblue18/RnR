@@ -24,16 +24,25 @@ export default async function ProfilePage() {
     <Flex>
       <Card maxW="sm" borderWidth="1px" overflow="hidden" mr={10}>
         <CardBody>
-          <Flex p={4} flexDirection="column" alignItems="flex-start">
+          <Flex p={4} alignItems="center" borderBottom="1px solid black">
             <Avatar
               name={capitalizeFirstLetter(session?.user?.name)}
               src={session?.user?.image}
               size="lg"
+              mr={4}
+              borderColor="black.500"
+              borderWidth="2px"
             />
-            <Text mt={2} fontWeight="bold">
-              Name: {capitalizeFirstLetter(session?.user?.name)}
-            </Text>
-            <Text>Email: {capitalizeFirstLetter(session?.user?.email)}</Text>
+            <Flex flexDirection="column">
+              <Text fontWeight="bold" mb={1}>
+                {" "}
+                Name: {capitalizeFirstLetter(session?.user?.name)}
+              </Text>
+              <Text fontWeight="bold" mb={1}>
+                Email: {capitalizeFirstLetter(session?.user?.email)}
+              </Text>
+            </Flex>
+            <div style={{ borderBottom: "1px solid black" }}></div>
           </Flex>
         </CardBody>
       </Card>
