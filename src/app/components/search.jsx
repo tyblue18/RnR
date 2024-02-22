@@ -3,14 +3,13 @@ import {
   Input,
   Card,
   CardBody,
-  Avatar,
-  Text,
   InputLeftElement,
   InputGroup,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Style from "@/app/styles/navBar.module.css";
+import UsersList from "@/app/components/userList";
 
 export default function Search() {
   const [users, setUsers] = useState([]);
@@ -42,23 +41,7 @@ export default function Search() {
         ></Input>
       </InputGroup>
       <CardBody display="flex" flexDirection="column" pt={0}>
-        {users.map((user) => {
-          return (
-            <div key={user.email}>
-              <button className={Style.userButton}>
-                <Avatar name={user?.name} src={user?.image} size="sm" m={3} />
-                <section>
-                  <Text fontSize="sm" textAlign="left">
-                    {user.name}
-                  </Text>
-                  <Text fontSize="xs" textAlign="left">
-                    {user.email}
-                  </Text>
-                </section>
-              </button>
-            </div>
-          );
-        })}
+        <UsersList users={users}></UsersList>
       </CardBody>
     </Card>
   );
