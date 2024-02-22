@@ -11,9 +11,12 @@ import {
 import UsersList from "@/app/components/userList";
 import Style from "@/app/styles/navBar.module.css";
 import { capitalizeFirstLetter } from "@/libs/util";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
+  if (!session) redirect("/");
+
   const users = await fetch("http://localhost:3000/api/user")
     .then((res) => res.json())
     .then((res) => {
