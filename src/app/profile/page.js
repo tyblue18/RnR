@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { Avatar, Text, Flex } from "@chakra-ui/react";
+import { Avatar, Text, Flex, Button } from "@chakra-ui/react";
 import {
   Card,
   CardHeader,
@@ -44,6 +44,13 @@ export default async function ProfilePage() {
             </Flex>
             <div style={{ borderBottom: "1px solid black" }}></div>
           </Flex>
+          <Text mt={4} fontWeight="bold">
+            Flavor Profile:
+          </Text>
+          <Text fontWeight="bold">Likes Given:</Text>
+          <Button mt={4} variant="outline" size="sm">
+            Friends List
+          </Button>
         </CardBody>
       </Card>
 
