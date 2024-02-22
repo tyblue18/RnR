@@ -1,4 +1,4 @@
-import { Avatar, Text, Button } from "@chakra-ui/react";
+import { Avatar, Text, IconButton } from "@chakra-ui/react";
 import { AddIcon } from "./icons";
 import Style from "@/app/styles/navBar.module.css";
 
@@ -18,9 +18,16 @@ export default function UsersList({ users }) {
                   {user.email}
                 </Text>
               </section>
-              {/* <Button>
-                <AddIcon />
-              </Button> */}
+              <section style={{ flex: 1, marginRight: "10px" }}>
+                <IconButton
+                  icon={<AddIcon />}
+                  isRound={true}
+                  colorScheme="green"
+                  size="xs"
+                  float="right"
+                  aria-label="idk"
+                ></IconButton>
+              </section>
             </div>
           </div>
         );
