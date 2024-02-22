@@ -22,13 +22,7 @@ export default async function ProfilePage() {
 
   return (
     <Flex>
-      <Card
-        maxW="sm"
-        borderWidth="1px"
-        borderRadius="sm"
-        overflow="hidden"
-        mr={10}
-      >
+      <Card maxW="sm" borderWidth="1px" overflow="hidden" mr={10}>
         <CardBody>
           <Flex p={4} flexDirection="column" alignItems="flex-start">
             <Avatar

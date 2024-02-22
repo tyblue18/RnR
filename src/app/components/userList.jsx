@@ -1,4 +1,5 @@
-import { Avatar, Text } from "@chakra-ui/react";
+import { Avatar, Text, Button } from "@chakra-ui/react";
+import { AddIcon } from "./icons";
 import Style from "@/app/styles/navBar.module.css";
 
 export default function UsersList({ users }) {
@@ -7,7 +8,7 @@ export default function UsersList({ users }) {
       {users.map((user) => {
         return (
           <div key={user.email}>
-            <button className={Style.userButton}>
+            <div className={Style.userButton}>
               <Avatar name={user?.name} src={user?.image} size="sm" m={3} />
               <section>
                 <Text fontSize="sm" textAlign="left">
@@ -17,7 +18,10 @@ export default function UsersList({ users }) {
                   {user.email}
                 </Text>
               </section>
-            </button>
+              {/* <Button>
+                <AddIcon />
+              </Button> */}
+            </div>
           </div>
         );
       })}
