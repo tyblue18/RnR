@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import UsersList from "@/app/components/userList";
 import Style from "@/app/styles/navBar.module.css";
+import { capitalizeFirstLetter } from "@/libs/util";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
@@ -31,14 +32,14 @@ export default async function ProfilePage() {
         <CardBody>
           <Flex p={4} flexDirection="column" alignItems="flex-start">
             <Avatar
-              name={session?.user?.name}
+              name={capitalizeFirstLetter(session?.user?.name)}
               src={session?.user?.image}
               size="lg"
             />
             <Text mt={2} fontWeight="bold">
-              Name: {session?.user?.name}
+              Name: {capitalizeFirstLetter(session?.user?.name)}
             </Text>
-            <Text>Email: {session?.user?.email}</Text>
+            <Text>Email: {capitalizeFirstLetter(session?.user?.email)}</Text>
           </Flex>
         </CardBody>
       </Card>
