@@ -2,19 +2,11 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Text, Button, Flex } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { useState } from "react";
 import { capitalizeFirstLetter } from "@/libs/util";
 import style from "@/app/styles/navBar.module.css";
+import { redirect } from "next/navigation";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,9 +52,19 @@ export default function NavBar() {
                   </Flex>
                   <MenuItem
                     onClick={() => {
+                      window.location.replace("http://localhost:3000/profile");
+                      setIsMenuOpen(false);
+                    }}
+                    color="black"
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
                       statusFunc();
                       setIsMenuOpen(false);
                     }}
+                    color="red"
                   >
                     Sign Out
                   </MenuItem>
