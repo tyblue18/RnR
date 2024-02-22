@@ -10,6 +10,7 @@
     "db:install": "docker pull mongodb/mongodb-community-server",
     "db:up": "npm run db:start && npm run db:create",
     "db:down": "docker kill RRdb ; docker rm /RRdb",
+    "db:restart": "npm run db:down ; npm run db:up",
     "db:start": "docker run --name RRdb -d -p 27017:27017 mongodb/mongodb-community-server:latest",
     "db:create": "node --experimental-specifier-resolution=node --experimental-modules --env-file=.env.local ./src/db/createSeed.mjs",
     "db:sh": "docker exec -it RRdb mongosh",
