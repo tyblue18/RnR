@@ -22,7 +22,16 @@ export default function NavBar() {
   return (
     <>
       <nav className={style.nav}>
-        <Text ml={10}>Flavy</Text>
+        <Button
+          ml={10}
+          variant="ghost"
+          color="white"
+          onClick={() => {
+            window.location.replace("http://localhost:3000/home");
+          }}
+        >
+          Flavy
+        </Button>
         <div className={style.rightSection}>
           {status === "authenticated" ? (
             <>
