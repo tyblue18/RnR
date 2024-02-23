@@ -1,17 +1,19 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { Avatar, Text, Flex, Button } from "@chakra-ui/react";
 import {
+  Avatar,
+  Text,
+  Flex,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
+  CardHeader,
   Heading,
 } from "@chakra-ui/react";
 import UsersList from "@/app/components/userList";
 import Style from "@/app/styles/navBar.module.css";
 import { capitalizeFirstLetter } from "@/libs/util";
 import { redirect } from "next/navigation";
+import Drawer from "@/app/components/drawer";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
@@ -46,9 +48,7 @@ export default async function ProfilePage() {
             Flavor Profile:
           </Text>
           <Text fontWeight="bold">Likes Given:</Text>
-          <Button mt={4} variant="outline" size="sm">
-            Friends List
-          </Button>
+          <Drawer users={users}></Drawer>
         </CardBody>
       </Card>
 
