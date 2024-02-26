@@ -3,24 +3,8 @@ import {
   UserModel,
   FriendModel,
   createUserModel,
+  addFriend,
 } from "./models/User.model.mjs";
-
-async function addFriend(person1, person2) {
-  const friend1 = await FriendModel.create({
-    friend: person2._id,
-    status: "invited",
-  });
-  const friend2 = await FriendModel.create({
-    friend: person1._id,
-    status: "pending",
-  });
-
-  person1.friends.push(friend1);
-  person2.friends.push(friend2);
-
-  await person1.save();
-  await person2.save();
-}
 
 export async function createSeedData() {
   await db;
