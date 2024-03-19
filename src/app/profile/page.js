@@ -19,6 +19,9 @@ export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/");
 
+  const date = new Date();
+  date.setDate(date.getDate());
+
   const users = await fetch("http://localhost:3000/api/user")
     .then((res) => res.json())
     .then((res) => {
@@ -27,8 +30,15 @@ export default async function ProfilePage() {
 
   return (
     <Flex>
-      <Card maxW="sm" borderWidth="1px" overflow="hidden" mr={10}>
+      <Card
+        className="card"
+        maxW="sm"
+        borderWidth="1px"
+        overflow="hidden"
+        mr={10}
+      >
         <CardBody>
+          <p>{date.toDateString()}</p>
           <Flex p={4} alignItems="center" borderBottom="1px solid black">
             <Avatar
               name={capitalizeFirstLetter(session?.user?.name)}
