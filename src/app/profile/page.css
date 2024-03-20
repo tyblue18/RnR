@@ -1,6 +1,19 @@
-
 .card {
-    justify-content: center;
-    color: red;
-  }
-  
+  justify-content: center;
+  color: red;
+}
+
+.footer {
+  font-size: 15px;
+  color: black;
+  font-style: italic;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+  border-top: 5px solid rgba(237, 0, 254, 0.451);
+}
+

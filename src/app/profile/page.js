@@ -14,13 +14,11 @@ import Style from "@/app/styles/navBar.module.css";
 import { capitalizeFirstLetter } from "@/libs/util";
 import { redirect } from "next/navigation";
 import Drawer from "@/app/components/drawer";
+import "./page.css";
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/");
-
-  const date = new Date();
-  date.setDate(date.getDate());
 
   const users = await fetch("http://localhost:3000/api/user")
     .then((res) => res.json())
@@ -38,7 +36,6 @@ export default async function ProfilePage() {
         mr={10}
       >
         <CardBody>
-          <p>{date.toDateString()}</p>
           <Flex p={4} alignItems="center" borderBottom="1px solid black">
             <Avatar
               name={capitalizeFirstLetter(session?.user?.name)}
@@ -61,7 +58,6 @@ export default async function ProfilePage() {
           <Drawer users={users}></Drawer>
         </CardBody>
       </Card>
-
       <Card className={Style.select}>
         <CardHeader pb={2}>
           <Heading size="md">Friends list: </Heading>
@@ -75,6 +71,20 @@ export default async function ProfilePage() {
           <UsersList users={users}></UsersList>
         </CardBody>
       </Card>
+      <Footer />
     </Flex>
+  );
+}
+
+export function Footer() {
+  const date = new Date();
+  date.setDate(date.getDate());
+
+  return (
+    <footer className="footer">
+      <div className="date">
+        <h1 className="dateCard">{date.toDateString()}</h1>
+      </div>
+    </footer>
   );
 }
