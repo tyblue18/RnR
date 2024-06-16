@@ -61,6 +61,7 @@ export default function NavBar() {
                   </Flex>
                   <MenuItem
                     onClick={() => {
+                      console.log("uhh");
                       window.location.replace("http://localhost:3000/profile");
                       setIsMenuOpen(false);
                     }}

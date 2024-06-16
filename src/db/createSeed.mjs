@@ -1,17 +1,12 @@
 import db from "../libs/mongo.lib.mjs";
-import {
-  UserModel,
-  FriendModel,
-  createUserModel,
-  addFriend,
-} from "./models/User.model.mjs";
+import { createUserModel, addFriend } from "./models/User.model.mjs";
 
 export async function createSeedData() {
   await db;
 
   const ragum = await createUserModel({
     name: "Ragum Hirjani",
-    email: "RAYRAY@gmail.com",
+    email: "RAYRAY@bot.com",
     phoneNumber: "865-420-6969",
     image: "https://cdn-icons-png.flaticon.com/512/4081/4081796.png",
     spicy: 1,
@@ -42,7 +37,7 @@ export async function createSeedData() {
     sour: 1,
   });
 
-  await addFriend(ragum, meezu);
+  await addFriend(ragum._id, meezu._id);
 }
 
 await createSeedData();

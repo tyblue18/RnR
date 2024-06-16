@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getAuth } from "@/libs/auth";
 import {
   Avatar,
   Text,
@@ -16,7 +15,8 @@ import { redirect } from "next/navigation";
 import Drawer from "@/app/components/drawer";
 
 export default async function ProfilePage() {
-  const session = await getServerSession(authOptions);
+  const session = await getAuth();
+
   if (!session) redirect("/");
 
   const users = await fetch("http://localhost:3000/api/user")

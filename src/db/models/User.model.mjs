@@ -49,21 +49,30 @@ export async function createUserModel(user) {
   return await UserModel.create(createUser(user));
 }
 
-export async function addFriend(person1, person2) {
+export async function addFriend(user1Id, user2Id) {
+  const user1 = await models.User.findById(user1Id);
+  const user2 = await models.User.findById(user2Id);
+
+  if (!user1 || !user2) {
+    return false;
+  }
+
   const friend1 = await FriendModel.create({
-    friend: person2._id,
+    friend: user2Id,
     status: "invited",
   });
   const friend2 = await FriendModel.create({
-    friend: person1._id,
+    friend: user1Id,
     status: "pending",
   });
 
-  person1.friends.set(person2._id, friend1);
-  person2.friends.set(person1._id, friend2);
+  user1.friends.set(user2Id, friend1);
+  user2.friends.set(user1Id, friend2);
 
-  await person1.save();
-  await person2.save();
+  await user1.save();
+  await user2.save();
+
+  return true;
 }
 
 export const FriendModel = models.Friend || model("Friend", friendSchema);

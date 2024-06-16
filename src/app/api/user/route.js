@@ -13,11 +13,8 @@ export async function GET(request) {
 
     const regex = new RegExp(name, "i");
     if (!name) {
-      users = await UserModel.find({}, { _id: 0 })
-        .populate({
-          path: "friends",
-          populate: { path: "friend", select: "name -_id" },
-        })
+      users = await UserModel.find({})
+        .populate({ path: "friends.$*.friend", select: "name -_id" })
         .exec();
     } else {
       users = await UserModel.find(
@@ -26,10 +23,7 @@ export async function GET(request) {
         },
         { _id: 0 }
       )
-        .populate({
-          path: "friends",
-          populate: { path: "friend", select: "name -_id" },
-        })
+        .populate({ path: "friends.$*.friend", select: "name -_id" })
         .exec();
     }
 
